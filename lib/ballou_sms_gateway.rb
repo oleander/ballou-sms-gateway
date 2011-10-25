@@ -4,7 +4,7 @@ require "uri"
 require "acts_as_chain"
 
 class BallouSmsGateway
-  acts_as_chain :username, :password, :id, :request_id, :message, :to, :from
+  acts_as_chain :username, :password, :id, :request_id, :message
   
   def initialize
     # 
@@ -47,6 +47,20 @@ class BallouSmsGateway
   
   def url
     @url % [@username, @password, @id, @request_id, @from, @to, @long, escaped_message]
+  end
+  
+  #
+  # @to A list of phonenumbers. Can contain 0-9 and the "+" sign.
+  #
+  def to(*to)
+    to.flatten.each do |number|
+      unless number.to_s.match(/[0-9\+]{4,}/)
+        raise "Invalid receiver."
+      end
+    end
+    
+    @to = to.flatten.map { |number| CGI::escape(number) }.join(",")
+    return self
   end
   
   def escaped_message
