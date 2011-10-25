@@ -12,10 +12,10 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = "1.0.0"
   
-  gem.add_dependency("rest-client")
-  gem.add_dependency("uuid")
-  gem.add_dependency("nokogiri")
-  gem.add_dependency("acts_as_chain")
+  gem.add_dependency("rest-client", "~> 1.6.7")
+  gem.add_dependency("uuid", "~> 2.3.4")
+  gem.add_dependency("nokogiri", "~> 1.5.0")
+  gem.add_dependency("acts_as_chain", "~> 1.0.1")
   
   gem.add_development_dependency("vcr")
   gem.add_development_dependency("rspec")  
