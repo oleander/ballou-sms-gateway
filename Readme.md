@@ -44,9 +44,9 @@ Take a look at the [official (swedish) site](http://www.ballou.se/exempel/) for 
 ### The send! method
 
 When you're done buildning your query the final thing todo is to apply the `send!` method.
-It'll fire the request or raise an error if something when wrong.
+It'll fire the request or raise an error if something was wrong.
 
-The `send!` method returns an request object with the following methods.
+The `send!` method returns a request object with the following methods.
 
 - **id** (String) A unique ID generated Ballou.
 - **request_id** (String) Request ID defined by you using the `request_id` method, or an auto-generated UUID string.
