@@ -1,0 +1,156 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://sms2.ballou.se:80/http/get/SendSms.php?CR=345b9360-e17c-012e-9c99-58b035fcfcff&D=<phone>&LONGSMS=false&M=This%20is%20an%20example&O=BallouSms&PW=<password>&RI=345b9840-e17c-012e-9c9a-58b035fcfcff&UN=<username>
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Tue, 25 Oct 2011 21:14:08 GMT
+      server: 
+      - Apache
+      content-length: 
+      - "326"
+      content-type: 
+      - text/xml
+    body: |
+      <?xml version="1.0" encoding="ISO-8859-1"?>
+      <!DOCTYPE ballou_sms_response PUBLIC "-//ballou//SMS Response DTD//EN" "http://sms2.ballou.se/dtd/ballou_sms_response.dtd">
+      <ballou_sms_response>
+          <response type="status"><message id="219577248823" to_msisdn="<phone>" status="-1" error="0"/></response>
+      </ballou_sms_response>
+
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://sms2.ballou.se:80/http/get/SendSms.php?CR=377ff250-e17c-012e-9ca9-58b035fcfcff&D=<phone>&LONGSMS=false&M=This%20is%20an%20example&O=BallouSms&PW=<password>&RI=377ff770-e17c-012e-9caa-58b035fcfcff&UN=<username>
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Tue, 25 Oct 2011 21:14:13 GMT
+      server: 
+      - Apache
+      content-length: 
+      - "326"
+      content-type: 
+      - text/xml
+    body: |
+      <?xml version="1.0" encoding="ISO-8859-1"?>
+      <!DOCTYPE ballou_sms_response PUBLIC "-//ballou//SMS Response DTD//EN" "http://sms2.ballou.se/dtd/ballou_sms_response.dtd">
+      <ballou_sms_response>
+          <response type="status"><message id="219577253825" to_msisdn="<phone>" status="-1" error="0"/></response>
+      </ballou_sms_response>
+
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://sms2.ballou.se:80/http/get/SendSms.php?CR=4460ef30-e17c-012e-9cb9-58b035fcfcff&D=<phone>&LONGSMS=false&M=This%20is%20an%20example&O=BallouSms&PW=<password>&RI=4460f640-e17c-012e-9cba-58b035fcfcff&UN=<username>
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Tue, 25 Oct 2011 21:14:35 GMT
+      server: 
+      - Apache
+      content-length: 
+      - "326"
+      content-type: 
+      - text/xml
+    body: |
+      <?xml version="1.0" encoding="ISO-8859-1"?>
+      <!DOCTYPE ballou_sms_response PUBLIC "-//ballou//SMS Response DTD//EN" "http://sms2.ballou.se/dtd/ballou_sms_response.dtd">
+      <ballou_sms_response>
+          <response type="status"><message id="219577275827" to_msisdn="<phone>" status="-1" error="0"/></response>
+      </ballou_sms_response>
+
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://sms2.ballou.se:80/http/get/SendSms.php?CR=858426d0-e17c-012e-9cc9-58b035fcfcff&D=<phone>&LONGSMS=false&M=This%20is%20an%20example&O=BallouSms&PW=<password>&RI=85842bf0-e17c-012e-9cca-58b035fcfcff&UN=<username>
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Tue, 25 Oct 2011 21:16:24 GMT
+      server: 
+      - Apache
+      content-length: 
+      - "326"
+      content-type: 
+      - text/xml
+    body: |
+      <?xml version="1.0" encoding="ISO-8859-1"?>
+      <!DOCTYPE ballou_sms_response PUBLIC "-//ballou//SMS Response DTD//EN" "http://sms2.ballou.se/dtd/ballou_sms_response.dtd">
+      <ballou_sms_response>
+          <response type="status"><message id="219577384846" to_msisdn="<phone>" status="-1" error="0"/></response>
+      </ballou_sms_response>
+
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://sms2.ballou.se:80/http/get/SendSms.php?CR=858426d0-e17c-012e-9cc9-58b035fcfcff&D=<phone>&LONGSMS=false&M=This%20is%20an%20example&O=BallouSms&PW=<password>&RI=345b9360-e17c-012e-9c99-58b035fcfcff&UN=<username>
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Tue, 25 Oct 2011 21:30:14 GMT
+      server: 
+      - Apache
+      content-length: 
+      - "326"
+      content-type: 
+      - text/xml
+    body: |
+      <?xml version="1.0" encoding="ISO-8859-1"?>
+      <!DOCTYPE ballou_sms_response PUBLIC "-//ballou//SMS Response DTD//EN" "http://sms2.ballou.se/dtd/ballou_sms_response.dtd">
+      <ballou_sms_response>
+          <response type="status"><message id="219578214912" to_msisdn="<phone>" status="-1" error="0"/></response>
+      </ballou_sms_response>
+
+    http_version: "1.1"

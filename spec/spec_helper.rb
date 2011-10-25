@@ -4,6 +4,8 @@ require "movies"
 require "vcr"
 require "ballou_sms_gateway"
 
+USER = YAML.load_file "./spec/fixtures/user_details.yml"
+
 RSpec.configure do |config|
   config.mock_with :rspec
   config.extend VCR::RSpec::Macros
@@ -16,4 +18,8 @@ VCR.config do |c|
     record: :new_episodes
   }
   c.allow_http_connections_when_no_cassette = false
+  
+  USER.keys.each do |key|
+    c.filter_sensitive_data("<#{key}>") { USER[key].to_s }
+  end
 end

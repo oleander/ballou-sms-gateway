@@ -4,6 +4,8 @@ describe BallouSmsGateway do
   let(:gateway) { BallouSmsGateway.new }
   let(:from) { "Person A" }
   let(:to) { "0702211444" }
+  let(:id) { "858426d0-e17c-012e-9cc9-58b035fcfcff" }
+  let(:request_id) { "345b9360-e17c-012e-9c99-58b035fcfcff" }
   
   describe "#message" do
     before(:each) do
@@ -94,17 +96,15 @@ describe BallouSmsGateway do
     
   context "request" do
     use_vcr_cassette "valid-request"
-    
-    before(:each) do
-      WebMock.disable_net_connect!
-    end
-    
-    it "should validate sender" do
+        
+    it "should be possible to send a message" do
       gateway.
         password(USER["password"]).
         username(USER["username"]).
         from("BallouSms").
         to(USER["phone"]).
+        id(id).
+        request_id(request_id).
         message("This is an example").
         send!
     end
