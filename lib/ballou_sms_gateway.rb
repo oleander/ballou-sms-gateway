@@ -46,15 +46,14 @@ class BallouSmsGateway
       raise "Message is to long, #{@message.length} characters."
     end
     
-    unless @from
-      raise "You need to specify a sender using #from."
+    [:from, :to, :password, :username].each do |method|
+      var = instance_variable_get("@#{method}")
+      unless var
+        raise "You need to specify #{method}, using the ##{method} method."
+      end
     end
     
-    unless @to
-      raise "You need to specify a receiver using #to."
-    end
-    
-    RestClient.get(url)
+    do_request!
   end
     
   #
@@ -89,7 +88,7 @@ class BallouSmsGateway
       raise "Sender is invalid, to long."
     end
     
-    @from = from
+    @from = CGI::escape(from)
     return self
   end
   
@@ -100,5 +99,11 @@ class BallouSmsGateway
     
     def url
       @url % [@username, @password, @id, @request_id, @from, @to, @long, escaped_message]
+    end
+    
+    def do_request!
+      RestClient.get(url)
+    rescue RestClient::Exception
+      puts "ERROR: #{$!.inspect}"
     end
 end

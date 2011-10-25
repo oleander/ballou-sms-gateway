@@ -2,7 +2,8 @@ describe BallouSmsGateway do
   let(:long_message) { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a" }
   let(:message) { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr" }
   let(:gateway) { BallouSmsGateway.new }
-  let(:from) { "0702211444" }
+  let(:from) { "Person A" }
+  let(:to) { "0702211444" }
   
   describe "#message" do
     before(:each) do
@@ -27,14 +28,26 @@ describe BallouSmsGateway do
       RestClient.should_receive(:get).any_number_of_times
     end
     
-    it "should raise error if we're trying to send a message without using #from or #to" do
+    it "should raise error if we're trying to send a non valid message" do
       lambda {
         gateway.message(message).send!
-      }.should raise_error("You need to specify a sender using #from.")
+      }.should raise_error("You need to specify from, using the #from method.")
       
       lambda {
         gateway.from(from).message(message).send!
-      }.should raise_error("You need to specify a receiver using #to.")
+      }.should raise_error("You need to specify to, using the #to method.")
+      
+      lambda {
+        gateway.from(from).to(to).message(message).send!
+      }.should raise_error("You need to specify password, using the #password method.")
+      
+      lambda {
+        gateway.from(from).to(to).message(message).send!
+      }.should raise_error("You need to specify password, using the #password method.")
+      
+      lambda {
+        gateway.from(from).to(to).password("password").message(message).send!
+      }.should raise_error("You need to specify username, using the #username method.")
     end
   end
   
@@ -79,15 +92,21 @@ describe BallouSmsGateway do
     
   end
     
-  context "fake request" do
+  context "request" do
+    use_vcr_cassette "valid-request"
+    
     before(:each) do
-      # RestClient.should_receive(:get).once
+      WebMock.disable_net_connect!
     end
     
     it "should validate sender" do
-      # lambda {
-      #   BallouSmsGateway.new.message(long_message).send!
-      # }.should raise_error("Message is to long, 201 characters.")
+      gateway.
+        password(USER["password"]).
+        username(USER["username"]).
+        from("BallouSms").
+        to(USER["phone"]).
+        message("This is an example").
+        send!
     end
   end  
 end
