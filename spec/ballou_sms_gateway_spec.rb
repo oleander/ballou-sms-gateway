@@ -93,8 +93,38 @@ describe BallouSmsGateway do
     end
     
   end
+  
+  describe "#request_id and #id" do
+    it "should be possible to pass id" do
+      stub_request(:get, /.*/).to_return(status: 200)
+      request = gateway.
+        password(USER["password"]).
+        username(USER["username"]).
+        from("BallouSms").
+        to(USER["phone"]).
+        id("my_custom_id").
+        request_id(request_id).
+        message("This is an example").
+        send!
+      a_request(:get, /CR=my_custom_id/).should have_been_made.once
+    end
     
-  context "request" do
+    it "should be possible to pass request_id" do
+      stub_request(:get, /.*/).to_return(status: 200)
+      request = gateway.
+        password(USER["password"]).
+        username(USER["username"]).
+        from("BallouSms").
+        to(USER["phone"]).
+        id(id).
+        request_id("my_custom_request_id").
+        message("This is an example").
+        send!
+      a_request(:get, /RI=my_custom_request_id/).should have_been_made.once
+    end
+  end
+  
+  describe "request" do
     use_vcr_cassette "valid-request"
         
     it "should be possible to send a message" do
@@ -149,5 +179,5 @@ describe BallouSmsGateway do
       request.error.should eq(7)
       request.should_not be_send
     end
-  end  
+  end
 end

@@ -185,3 +185,34 @@
       </ballou_sms_response>
 
     http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://sms2.ballou.se:80/http/get/SendSms.php?CR=URI::escape(@id)&D=@to&LONGSMS=@long&M=CGI::escape(@message)&O=@from&PW=URI::escape(@password)&RI=URI::escape(@request_id)&UN=URI::escape(@username)
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      date: 
+      - Tue, 25 Oct 2011 22:11:30 GMT
+      server: 
+      - Apache
+      content-length: 
+      - "277"
+      content-type: 
+      - text/xml
+    body: |
+      <?xml version="1.0" encoding="ISO-8859-1"?>
+      <!DOCTYPE ballou_sms_response PUBLIC "-//ballou//SMS Response DTD//EN" "http://sms2.ballou.se/dtd/ballou_sms_response.dtd">
+      <ballou_sms_response>
+         <error code="2">Authentication failed or IP rejected</error>
+      </ballou_sms_response>
+
+    http_version: "1.1"

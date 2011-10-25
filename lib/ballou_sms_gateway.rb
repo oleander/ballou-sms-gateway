@@ -1,6 +1,7 @@
 require "uuid"
 require "rest-client"
 require "uri"
+require "cgi"
 require "acts_as_chain"
 require "nokogiri"
 require "ballou_sms_gateway/request"
@@ -115,7 +116,16 @@ class BallouSmsGateway
     end
     
     def url
-      @url % [@username, @password, @id, @request_id, @from, @to, @long, escaped_message]
+      @url % [
+        URI::escape(@username),
+        URI::escape(@password),
+        URI::escape(@id),
+        URI::escape(@request_id),
+        @from,
+        @to,
+        @long,
+        CGI::escape(@message)
+      ]
     end
     
     def do_request!
