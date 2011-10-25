@@ -6,7 +6,7 @@ Follow me on [Twitter](http://twitter.com/linusoleander) or [Github](https://git
 
 ## How to use
 
-### Send SMS
+### Send a message
 
 ``` ruby
 BallouSmsGateway.new.username("u").password("p").from("Github").to("070XXXXXXX").message("Hello world!").send!
