@@ -63,6 +63,22 @@ class BallouSmsGateway
     return self
   end
   
+  def from(from)
+    if from.to_s.length.zero?
+      raise "Sender is invalid, to short."
+    end
+    
+    # Max length 15 for integers and 10 for chars 
+    if from.match(/^[0-9]+$/)
+      if  from.length > 15
+        raise "Sender is invalid, to long."
+      end
+    elsif from.length > 10
+      raise "Sender is invalid, to long."
+    end
+    
+    @from = from
+  end
   def escaped_message
     CGI::escape(@message)
   end
