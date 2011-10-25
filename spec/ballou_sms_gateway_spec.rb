@@ -59,7 +59,7 @@ describe BallouSmsGateway do
     end
     
     it "should fail duo to invalid phonenumber" do
-      ["invalid", "070-123-123", "070invalid", ["invalid"]].each do |number|
+      ["invalid", "070-123-123", "070invalid", ["invalid"], "070+220022"].each do |number|
         lambda {
           gateway.to(number)
         }.should raise_error("Invalid receiver.")

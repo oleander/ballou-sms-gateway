@@ -79,7 +79,7 @@ class BallouSmsGateway
   # @return BallouSmsGateway
   def to(*to)
     to.flatten.each do |number|
-      unless number.to_s.match(/[0-9\+]{4,}/)
+      unless number.to_s.match(/^\+?[0-9]{4,}$/)
         raise "Invalid receiver."
       end
     end
