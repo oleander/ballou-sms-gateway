@@ -14,4 +14,12 @@ Gem::Specification.new do |gem|
   gem.name          = "ballou_sms_gateway"
   gem.require_paths = ["lib"]
   gem.version       = BallouSmsGateway::VERSION
+  
+  gem.add_dependency("rest-client")
+  gem.add_dependency("nokogiri")
+  gem.add_dependency("acts_as_chain")
+  
+  gem.add_development_dependency("vcr")
+  gem.add_development_dependency("rspec")  
+  gem.add_development_dependency("webmock")
 end

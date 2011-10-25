@@ -1,5 +1,3 @@
-require "ballou_sms_gateway/version"
-
-module BallouSmsGateway
-  # Your code goes here...
+class BallouSmsGateway
+  acts_as_chain :username, :password
 end
