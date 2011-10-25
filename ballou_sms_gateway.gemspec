@@ -20,4 +20,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency("vcr")
   gem.add_development_dependency("rspec")  
   gem.add_development_dependency("webmock")
+  
+  gem.required_ruby_version = "~> 1.9.0"
 end
