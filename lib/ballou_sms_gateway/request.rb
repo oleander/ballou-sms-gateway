@@ -1,6 +1,6 @@
 module BallouSmsGatewayModule
   class Request
-    attr_reader :id, :to
+    attr_reader :id, :to    
     def initialize(args)
       args.keys.each { |name| instance_variable_set "@" + name.to_s, args[name] }
     end
@@ -18,5 +18,7 @@ module BallouSmsGatewayModule
     def error
       @error.to_i
     end
+    
+    alias_method :valid?, :send?
   end
 end

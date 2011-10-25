@@ -131,5 +131,23 @@ describe BallouSmsGateway do
       request.error.should eq(3)
       request.should_not be_send
     end
+    
+    it "should be able to handle request errors" do
+      stub_request(:get, /.*/).to_return(status: 404)
+      request = gateway.
+        password(USER["password"]).
+        username(USER["username"]).
+        from("BallouSms").
+        to(USER["phone"]).
+        id(id).
+        request_id(request_id).
+        message("This is an example").
+        send!
+      
+      request.to.should eq(USER["phone"])
+      request.status.should eq(-2)
+      request.error.should eq(7)
+      request.should_not be_send
+    end
   end  
 end
