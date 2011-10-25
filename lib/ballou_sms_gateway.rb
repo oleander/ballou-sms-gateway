@@ -2,6 +2,7 @@ require "uuid"
 require "rest-client"
 require "uri"
 require "acts_as_chain"
+require "nokogiri"
 
 class BallouSmsGateway
   acts_as_chain :username, :password, :id, :request_id, :message
@@ -32,6 +33,7 @@ class BallouSmsGateway
     @id         = UUID.new.generate
     @long       = false
     @request_id = UUID.new.generate
+    @request    = Struct.new(:id, :to, :status, :error)
   end
   
   def long
@@ -53,7 +55,14 @@ class BallouSmsGateway
       end
     end
     
-    do_request!
+    doc = Nokogiri::XML(do_request!)    
+    response = doc.at_css("response message")
+    return @request.new(
+      response.attr("id"), 
+      response.attr("to_msisdn"), 
+      response.attr("status").to_i, 
+      response.attr("error").to_i
+    )
   end
     
   #
@@ -104,6 +113,6 @@ class BallouSmsGateway
     def do_request!
       RestClient.get(url)
     rescue RestClient::Exception
-      puts "ERROR: #{$!.inspect}"
+      return ""
     end
 end

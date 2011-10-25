@@ -98,7 +98,7 @@ describe BallouSmsGateway do
     use_vcr_cassette "valid-request"
         
     it "should be possible to send a message" do
-      gateway.
+      request = gateway.
         password(USER["password"]).
         username(USER["username"]).
         from("BallouSms").
@@ -107,6 +107,11 @@ describe BallouSmsGateway do
         request_id(request_id).
         message("This is an example").
         send!
+      
+      request.id.should eq("219578214912")
+      request.to.should eq(USER["phone"])
+      request.status.should eq(-1)
+      request.error.should eq(0)      
     end
   end  
 end
