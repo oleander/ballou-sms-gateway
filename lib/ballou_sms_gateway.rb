@@ -57,12 +57,12 @@ class BallouSmsGateway
     
     doc = Nokogiri::XML(do_request!)    
     response = doc.at_css("response message")
-    return BallouSmsGatewayModule::Request.new(
-      response.attr("id"), 
-      response.attr("to_msisdn"), 
-      response.attr("status").to_i, 
-      response.attr("error").to_i
-    )
+    return BallouSmsGatewayModule::Request.new({
+      id: response.attr("id"), 
+      to: response.attr("to_msisdn"), 
+      status: response.attr("status"), 
+      error: response.attr("error")
+    })
   end
     
   #

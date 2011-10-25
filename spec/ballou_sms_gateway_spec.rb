@@ -114,5 +114,22 @@ describe BallouSmsGateway do
       request.error.should eq(0)
       request.should be_send
     end
+    
+    it "should send message to invalid receiver" do
+      request = gateway.
+        password(USER["password"]).
+        username(USER["username"]).
+        from("BallouSms").
+        to("07011").
+        id(id).
+        request_id(request_id).
+        message("This is an example").
+        send!
+      
+      request.to.should eq("07011")
+      request.status.should eq(-2)
+      request.error.should eq(3)
+      request.should_not be_send
+    end
   end  
 end
