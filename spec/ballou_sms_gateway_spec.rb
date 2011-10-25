@@ -69,7 +69,7 @@ describe BallouSmsGateway do
     it "should not fail" do
       ["070123123", ["070229393", "+070203993"], "8372928384"].each do |number|
         lambda {
-          gateway.to(number)
+          gateway.to(*number)
         }.should_not raise_error
       end
     end
