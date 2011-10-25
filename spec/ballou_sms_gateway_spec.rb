@@ -111,7 +111,8 @@ describe BallouSmsGateway do
       request.id.should eq("219578214912")
       request.to.should eq(USER["phone"])
       request.status.should eq(-1)
-      request.error.should eq(0)      
+      request.error.should eq(0)
+      request.should be_send
     end
   end  
 end
