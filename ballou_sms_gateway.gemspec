@@ -1,6 +1,3 @@
-# -*- encoding: utf-8 -*-
-require File.expand_path('../lib/ballou_sms_gateway/version', __FILE__)
-
 Gem::Specification.new do |gem|
   gem.authors       = ["Linus Oleander"]
   gem.email         = ["linus@oleander.nu"]
@@ -13,9 +10,10 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "ballou_sms_gateway"
   gem.require_paths = ["lib"]
-  gem.version       = BallouSmsGateway::VERSION
+  gem.version       = "1.0.0"
   
   gem.add_dependency("rest-client")
+  gem.add_dependency("uuid")
   gem.add_dependency("nokogiri")
   gem.add_dependency("acts_as_chain")
   
