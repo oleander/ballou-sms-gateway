@@ -12,11 +12,9 @@ Follow me on [Twitter](http://twitter.com/linusoleander) or [Github](https://git
 BallouSmsGateway.new.username("u").password("p").from("Github").to("070XXXXXXX").message("Hello world!").send!
 ```
 
-![Hello world](http://i.imgur.com/DMmmt.png)
-
 ### Send a very long message
 
-Add the `long` method to the chain to send upto *918* characters.
+Add the `long` method to the chain to send up to *918* characters.
 
 ```` ruby
 BallouSmsGateway.new.username("u").password("p").from("Github").to("070XXXXXXX").message("A very long message ...").long.send!
@@ -24,27 +22,43 @@ BallouSmsGateway.new.username("u").password("p").from("Github").to("070XXXXXXX")
 
 ### Options
 
-The list below is a list of methods that can be chained, like above.
+The list below is a set of methods that can be chained, like above. **Order doens't matter.**
 
 - **id** (String) (CR) (Optimal) A unique id for the text message. Used for statics. Default is a [UUID string](http://en.wikipedia.org/wiki/Universally_unique_identifier).
 - **username** (String) (UN) Ballou username.
 - **password** (String) (PW) Ballou password.
-- **from** (String) (O) Who is the SMS from? A 10 character string, or a 15 character string containing only numbers.
-- **to** (String) (D) SMS receiver. May start start with a plus sign, otherwise just integers.
+- **from** (String) (O) Who is the SMS from? Up to 10 character using text or up to 15 character using only numbers.
+- **to** (String) (D) SMS receiver. May begin with a plus sign, otherwise just integers.
 - **message** (String) (M) Message to be send. Max 160 character, if the `long` flag isn't set.
 - **long** (No argument) (LONGSMS) Makes it possible to send a long message, up to *918* character.
 - **request_id** (String) (RI) (Optimal) Default is a [UUID string](http://en.wikipedia.org/wiki/Universally_unique_identifier).
 
 Take a look at the [official (swedish) site](http://www.ballou.se/exempel/) for more information.
 
+### The send! method
+
+When you're done buildning your query the final thing todo is to apply the `send!` method.
+It'll fire the request or raise an error if something when wrong.
+
+The `send!` method returns an request object with the following methods.
+
+- **id** (String) A unique id generated Ballou.
+- **to** (String) Receiver specified by you using the `to` method.
+- **send?** (Boolean) Was the SMS send?
+- **valid?** (Boolean) Alias for `send?`.
+- **error** (Fixnum) Error code. `0` if everything went okay.
+- **status** (Fixnum) Status code. `-1` means that the SMS was added to Ballou's queue.
+
+Take a look at the [status code page](http://www.ballou.se/exempel/) for more information about the diffrent status codes.
+
 ## How to install
 
-    [sudo] gem install movies
+    [sudo] gem install ballou_sms_gateway
 
 ## Requirements
 
-*Movies* is tested in *OS X 10.6.7* using Ruby *1.9.2*.
+*Ballou SMS gateway* is tested in *OS X 10.7.2* using Ruby *1.9.2*.
 
 ## License
 
-*Movies* is released under the *MIT license*.
+*Ballou SMS gateway* is released under the *MIT license*.
