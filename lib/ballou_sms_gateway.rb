@@ -56,6 +56,11 @@ class BallouSmsGateway
       end
     end
     
+    defaults = {
+      sms_id: @id,
+      request_id: @request_id
+    }
+    
     doc = Nokogiri::XML(do_request!)    
     response = doc.at_css("response message")
     if response
@@ -64,13 +69,13 @@ class BallouSmsGateway
         to: response.attr("to_msisdn"), 
         status: response.attr("status"), 
         error: response.attr("error")
-      })
+      }.merge(defaults))
     else
       BallouSmsGatewayModule::Request.new({
         to: @to,
         status: -2,
         error: 7
-      })
+      }.merge(defaults))
     end
   end
     

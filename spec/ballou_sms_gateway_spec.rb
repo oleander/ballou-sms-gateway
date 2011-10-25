@@ -139,6 +139,8 @@ describe BallouSmsGateway do
         send!
       
       request.id.should eq("219578214912")
+      request.sms_id.should eq(id)
+      request.request_id.should eq(request_id)
       request.to.should eq(USER["phone"])
       request.status.should eq(-1)
       request.error.should eq(0)
@@ -158,6 +160,8 @@ describe BallouSmsGateway do
       
       request.to.should eq("07011")
       request.status.should eq(-2)
+      request.sms_id.should eq(id)
+      request.request_id.should eq(request_id)
       request.error.should eq(3)
       request.should_not be_send
     end
@@ -176,6 +180,8 @@ describe BallouSmsGateway do
       
       request.to.should eq(USER["phone"])
       request.status.should eq(-2)
+      request.sms_id.should eq(id)
+      request.request_id.should eq(request_id)
       request.error.should eq(7)
       request.should_not be_send
     end
