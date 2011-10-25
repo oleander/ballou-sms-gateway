@@ -3,10 +3,23 @@ describe BallouSmsGateway do
   let(:message) { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr" }
   let(:gateway) { BallouSmsGateway.new }
   
-  it "should raise an error if message is to long" do
-    lambda {
-      gateway.message(long_message).send!
-    }.should raise_error("Message is to long, 201 characters.")
+  
+  describe "#message" do
+    before(:each) do
+      RestClient.should_receive(:get).any_number_of_times
+    end
+    
+    it "should raise an error if message is to long" do
+      lambda {
+        gateway.message(long_message).send!
+      }.should raise_error("Message is to long, 201 characters.")
+    end
+    
+    it "should not raise error if message is to long, if #long is used" do
+      lambda {
+        gateway.long.message(long_message).send!
+      }.should_not raise_error("Message is to long, 201 characters.")
+    end
   end
   
   describe "#to" do

@@ -38,17 +38,16 @@ class BallouSmsGateway
     tap { @long = true }
   end
   
+  #
+  # Sends the message. Raises error if message is to long or if @send and @from isn't set.
+  #
   def send!
     if @message.length > 160 and not @long
       raise "Message is to long, #{@message.length} characters."
     end
     RestClient.get(url)
   end
-  
-  def url
-    @url % [@username, @password, @id, @request_id, @from, @to, @long, escaped_message]
-  end
-  
+    
   #
   # @to A list of phonenumbers. Can contain 0-9 and the "+" sign.
   #
@@ -63,6 +62,9 @@ class BallouSmsGateway
     return self
   end
   
+  #
+  # @from String Sender. Max length when only numbers are submitet; 15, otherwise; 10
+  #
   def from(from)
     if from.to_s.length.zero?
       raise "Sender is invalid, to short."
@@ -79,7 +81,13 @@ class BallouSmsGateway
     
     @from = from
   end
-  def escaped_message
-    CGI::escape(@message)
-  end
+  
+  private
+    def escaped_message
+      CGI::escape(@message)
+    end
+    
+    def url
+      @url % [@username, @password, @id, @request_id, @from, @to, @long, escaped_message]
+    end
 end
