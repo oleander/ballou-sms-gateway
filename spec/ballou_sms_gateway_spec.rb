@@ -2,7 +2,7 @@ describe BallouSmsGateway do
   let(:long_message) { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a" }
   let(:message) { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr" }
   let(:gateway) { BallouSmsGateway.new }
-  
+  let(:from) { "0702211444" }
   
   describe "#message" do
     before(:each) do
@@ -19,6 +19,22 @@ describe BallouSmsGateway do
       lambda {
         gateway.long.message(long_message).send!
       }.should_not raise_error("Message is to long, 201 characters.")
+    end
+  end
+  
+  describe "#send!" do
+    before(:each) do
+      RestClient.should_receive(:get).any_number_of_times
+    end
+    
+    it "should raise error if we're trying to send a message without using #from or #to" do
+      lambda {
+        gateway.message(message).send!
+      }.should raise_error("You need to specify a sender using #from.")
+      
+      lambda {
+        gateway.from(from).message(message).send!
+      }.should raise_error("You need to specify a receiver using #to.")
     end
   end
   

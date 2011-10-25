@@ -45,12 +45,21 @@ class BallouSmsGateway
     if @message.length > 160 and not @long
       raise "Message is to long, #{@message.length} characters."
     end
+    
+    unless @from
+      raise "You need to specify a sender using #from."
+    end
+    
+    unless @to
+      raise "You need to specify a receiver using #to."
+    end
+    
     RestClient.get(url)
   end
     
   #
   # @to A list of phonenumbers. Can contain 0-9 and the "+" sign.
-  #
+  # @return BallouSmsGateway
   def to(*to)
     to.flatten.each do |number|
       unless number.to_s.match(/[0-9\+]{4,}/)
@@ -64,6 +73,7 @@ class BallouSmsGateway
   
   #
   # @from String Sender. Max length when only numbers are submitet; 15, otherwise; 10
+  # @return BallouSmsGateway
   #
   def from(from)
     if from.to_s.length.zero?
@@ -80,6 +90,7 @@ class BallouSmsGateway
     end
     
     @from = from
+    return self
   end
   
   private
