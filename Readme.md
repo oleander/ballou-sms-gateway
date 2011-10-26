@@ -36,7 +36,7 @@ The list below is a set of methods that can be chained, like above. **Order does
 - **from** (String) (O) Who is the SMS from? Up to 10 character using text or up to 15 character using only numbers.
 - **to** (String or Array< String >) (D) SMS receiver(s). May begin with a plus sign, otherwise just integers.
 - **message** (String) (M) Message to be send. Max 160 character, if the `long` flag isn't set.
-- **long** (No argument) (LONGSMS) Makes it possible to send a long message, up to *918* character.
+- **long** (No argument) (LONGSMS) Makes it possible to send a long message, up to *918* characters.
 - **request_id** (String) (RI) (Optimal) Default is a [UUID string](http://en.wikipedia.org/wiki/Universally_unique_identifier).
 
 Take a look at the [official (swedish) site](http://www.ballou.se/exempel/) for more information.
