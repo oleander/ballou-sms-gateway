@@ -33,9 +33,10 @@ class BallouSmsGateway
       M=%s
     }.join
     
-    @id         = UUID.new.generate
-    @long       = false
-    @request_id = UUID.new.generate
+    @id            = UUID.new.generate
+    @long          = false
+    @request_id    = UUID.new.generate
+    @error_message = nil
   end
   
   def long
@@ -82,7 +83,8 @@ class BallouSmsGateway
       BallouSmsGatewayModule::Request.new({
         to: @to,
         status: -2,
-        error: 7
+        error: 7,
+        message: @error_message
       }.merge(defaults))
     end
   end
@@ -138,9 +140,11 @@ class BallouSmsGateway
     end
     
     def do_request!
-      RestClient.get(url)
+      data = RestClient.get(url)
     rescue RestClient::Exception
-      return ""
+      @error_message = $!.message
+    ensure
+      data || ""
     end
     
     def to_latin_1(string)

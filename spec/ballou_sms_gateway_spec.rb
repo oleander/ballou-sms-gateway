@@ -185,6 +185,7 @@ describe BallouSmsGateway do
       request.request_id.should eq(request_id)
       request.error.should eq(7)
       request.should_not be_send
+      request.message.should eq("404 Resource Not Found")
     end
   end
   
