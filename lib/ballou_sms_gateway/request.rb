@@ -7,7 +7,7 @@ module BallouSmsGatewayModule
     #
     # @return Boolean Did everything went okay?
     #
-    def send?
+    def sent?
       error == 0
     end
     
@@ -19,6 +19,6 @@ module BallouSmsGatewayModule
       @error.to_i
     end
     
-    alias_method :valid?, :send?
+    alias_method :valid?, :sent?
   end
 end

@@ -145,7 +145,7 @@ describe BallouSmsGateway do
       request.status.should eq(-1)
       request.error.should eq(0)
       request.message.should be_empty
-      request.should be_send
+      request.should be_sent
     end
     
     it "should send message to invalid receiver" do
@@ -164,7 +164,7 @@ describe BallouSmsGateway do
       request.sms_id.should eq(id)
       request.request_id.should eq(request_id)
       request.error.should eq(3)
-      request.should_not be_send
+      request.should_not be_sent
     end
     
     it "should be able to handle request errors" do
@@ -184,7 +184,7 @@ describe BallouSmsGateway do
       request.sms_id.should eq(id)
       request.request_id.should eq(request_id)
       request.error.should eq(7)
-      request.should_not be_send
+      request.should_not be_sent
       request.message.should eq("404 Resource Not Found")
     end
   end
@@ -204,7 +204,7 @@ describe BallouSmsGateway do
         send!
         
       request.should_not be_valid
-      request.should_not be_send
+      request.should_not be_sent
       request.error.should eq(2)
       request.status.should eq(-2)
       request.message.should eq("Authentication failed or IP rejected")

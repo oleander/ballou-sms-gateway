@@ -52,8 +52,8 @@ The `send!` method returns a request object with the following methods.
 - **request_id** (String) Request ID defined by you using the `request_id` method, or an auto-generated UUID string.
 - **sms_id** (String) ID defined by you using the `id` method, or an auto-generated UUID string.
 - **to** (String) Receiver specified by you using the `to` method.
-- **send?** (Boolean) Was the SMS send?
-- **valid?** (Boolean) Alias for `send?`.
+- **sent?** (Boolean) Was the SMS sent?
+- **valid?** (Boolean) Alias for `sent?`.
 - **error** (Fixnum) Error code. `0` if everything went okay.
 - **status** (Fixnum) Status code. `-1` means that the SMS was added to Ballou's queue.
 - **message** (String) A message from Ballou. This is set when a request goes wrong.
