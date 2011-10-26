@@ -65,7 +65,7 @@ This, in most cases, means that you should take a look at the `error` status cod
 Error `7` means that the request resulted in a non `2xx` response. This should not happend unless Ballou goes down or in someway changes the API.
 Take a look at the `message` method for more information.
 
-Take a look at the [status code page](http://www.ballou.se/exempel/) for more information about the diffrent status codes.
+For *even* more information and status codes, visit the [official site](http://www.ballou.se/exempel/).
 
 ## How to install
 
