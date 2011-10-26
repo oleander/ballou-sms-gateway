@@ -1,6 +1,6 @@
 # Ballou SMS Gateway
 
-Unofficial API for [Ballou's SMS Gateway](http://www.ballou.se/tj%C3%A4nster/sms-verktyg).
+Ruby bindings for [Ballou's SMS Gateway](http://www.ballou.se/tj%C3%A4nster/sms-verktyg).
 
 Follow me on [Twitter](http://twitter.com/linusoleander) or [Github](https://github.com/oleander/) for more info and updates.
 

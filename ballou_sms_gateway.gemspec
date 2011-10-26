@@ -1,8 +1,8 @@
 Gem::Specification.new do |gem|
   gem.authors       = ["Linus Oleander"]
   gem.email         = ["linus@oleander.nu"]
-  gem.description   = %q{Unofficial API for Ballou's (ballou.se) SMS Gateway.}
-  gem.summary       = %q{Unofficial API for Ballou's (ballou.se) SMS Gateway.}
+  gem.description   = %q{Ruby bindings for Ballou's (ballou.se) SMS Gateway.}
+  gem.summary       = %q{Ruby bindings for Ballou's (ballou.se) SMS Gateway.}
   gem.homepage      = "https://github.com/oleander/ballou-sms-gateway"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
