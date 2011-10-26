@@ -58,7 +58,7 @@ The `send!` method returns a request object with the following methods.
 - **status** (Fixnum) Status code. `-1` means that the SMS was added to Ballou's queue.
 - **message** (String) A message from Ballou. This is set when a request goes wrong.
 
-Here are some custom states that might be usefull to know about.
+Here are some custom states that might be useful to know about.
 
 When a request goes wrong, like `404`, `500` and so on, the `status` method is set to `-2`.
 This, in most cases, means that you should take a look at the `error` status code for more information.
