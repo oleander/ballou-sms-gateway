@@ -28,7 +28,7 @@ BallouSmsGateway.new.username("u").password("p").from("Github").to("070XXXXXXX")
 
 ### Options
 
-The list below is a set of methods that can be chained, like above. **Order doens't matter.**
+The list below is a set of methods that can be chained, like above. **Order doesn't matter.**
 
 - **id** (String) (CR) (Optimal) A unique ID for the text message. Used for statics. Default is a [UUID string](http://en.wikipedia.org/wiki/Universally_unique_identifier).
 - **username** (String) (UN) Ballou username.
