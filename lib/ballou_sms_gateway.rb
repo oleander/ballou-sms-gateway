@@ -92,14 +92,14 @@ class BallouSmsGateway
   #
   # @to A list of phonenumbers. Can contain 0-9 and the "+" sign.
   # @return BallouSmsGateway
-  def to(*to)
-    to.flatten.each do |number|
+  def to(*receivers)
+    receivers.flatten.each do |number|
       unless number.to_s.match(/^\+?[0-9]{4,}$/)
         raise "Invalid receiver."
       end
     end
     
-    @to = to.flatten.map { |number| number }.join(",")
+    @to = receivers.flatten.join(",")
     return self
   end
   
@@ -107,21 +107,21 @@ class BallouSmsGateway
   # @from String Sender. Max length when only numbers are submitet; 15, otherwise; 10
   # @return BallouSmsGateway
   #
-  def from(from)
-    if from.to_s.length.zero?
+  def from(sender)
+    if sender.to_s.length.zero?
       raise "Sender is invalid, to short."
     end
     
     # Max length 15 for integers and 10 for chars 
-    if from.match(/^[0-9]+$/)
-      if  from.length > 15
+    if sender.match(/^[0-9]+$/)
+      if  sender.length > 15
         raise "Sender is invalid, to long."
       end
-    elsif from.length > 10
+    elsif sender.length > 10
       raise "Sender is invalid, to long."
     end
     
-    @from = from
+    @from = sender
     return self
   end
   
