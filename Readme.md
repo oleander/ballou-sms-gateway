@@ -56,6 +56,14 @@ The `send!` method returns a request object with the following methods.
 - **valid?** (Boolean) Alias for `send?`.
 - **error** (Fixnum) Error code. `0` if everything went okay.
 - **status** (Fixnum) Status code. `-1` means that the SMS was added to Ballou's queue.
+- **message** (String) A message from Ballou. This is set when a request goes wrong.
+
+I've added a custom states that might be usefull to know about.
+
+When a request goes wrong, like `404`, `500` and so on, the `status` method is set to `-2`.
+This, in most cases, means that you should take a look at the `error` status code for more information.
+Error `7` means that the request resulted in a non `2xx` request. This should not happend unless Ballou goes down or in someway changes the API.
+Take a look at the `message` method for more information.
 
 Take a look at the [status code page](http://www.ballou.se/exempel/) for more information about the diffrent status codes.
 
