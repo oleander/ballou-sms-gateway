@@ -144,6 +144,7 @@ describe BallouSmsGateway do
       request.to.should eq(USER["phone"])
       request.status.should eq(-1)
       request.error.should eq(0)
+      request.message.should be_empty
       request.should be_send
     end
     
@@ -184,6 +185,28 @@ describe BallouSmsGateway do
       request.request_id.should eq(request_id)
       request.error.should eq(7)
       request.should_not be_send
+    end
+  end
+  
+  describe "invalid request" do
+    use_vcr_cassette "invalid-request"
+    
+    it "should be able to handle error messages" do
+      request = gateway.
+        password("invalid").
+        username("invalid").
+        from("BallouSms").
+        to(USER["phone"]).
+        id(id).
+        request_id(request_id).
+        message("This is an example").
+        send!
+        
+      request.should_not be_valid
+      request.should_not be_send
+      request.error.should eq(2)
+      request.status.should eq(-2)
+      request.message.should eq("Authentication failed or IP rejected")
     end
   end
 end

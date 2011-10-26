@@ -1,6 +1,6 @@
 module BallouSmsGatewayModule
   class Request
-    attr_reader :id, :to, :sms_id, :request_id
+    attr_reader :id, :to, :sms_id, :request_id, :message
     def initialize(args)
       args.keys.each { |name| instance_variable_set "@" + name.to_s, args[name] }
     end
