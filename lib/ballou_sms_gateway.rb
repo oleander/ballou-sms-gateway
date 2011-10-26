@@ -4,6 +4,7 @@ require "uri"
 require "cgi"
 require "acts_as_chain"
 require "nokogiri"
+require "iconv"
 require "ballou_sms_gateway/request"
 
 class BallouSmsGateway
@@ -89,7 +90,7 @@ class BallouSmsGateway
       end
     end
     
-    @to = to.flatten.map { |number| CGI::escape(number) }.join(",")
+    @to = to.flatten.map { |number| number }.join(",")
     return self
   end
   
@@ -111,31 +112,31 @@ class BallouSmsGateway
       raise "Sender is invalid, to long."
     end
     
-    @from = CGI::escape(from)
+    @from = from
     return self
   end
   
   private
-    def escaped_message
-      CGI::escape(@message)
-    end
-    
     def url
       @url % [
-        URI::escape(@username),
-        URI::escape(@password),
-        URI::escape(@id),
-        URI::escape(@request_id),
+        @username,
+        @password,
+        @id,
+        @request_id,
         @from,
         @to,
         @long,
-        CGI::escape(@message)
-      ]
+        @message
+      ].map{|v| URI::escape(to_latin_1(v))}
     end
     
     def do_request!
       RestClient.get(url)
     rescue RestClient::Exception
       return ""
+    end
+    
+    def to_latin_1(string)
+      Iconv.conv("ISO-8859-1", "UTF-8", string.to_s)
     end
 end
