@@ -4,7 +4,6 @@ require "uri"
 require "cgi"
 require "acts_as_chain"
 require "nokogiri"
-require "iconv"
 require "ballou_sms_gateway/request"
 
 class BallouSmsGateway
@@ -136,7 +135,7 @@ class BallouSmsGateway
         @to,
         @long,
         @message
-      ].map{|v| URI::escape(to_latin_1(v))}
+      ].map{ |v| URI::escape(v.to_s) }
     end
     
     def do_request!
@@ -145,9 +144,5 @@ class BallouSmsGateway
       @error_message = $!.message
     ensure
       data || ""
-    end
-    
-    def to_latin_1(string)
-      Iconv.conv("ISO-8859-1", "UTF-8", string.to_s)
-    end
+    end    
 end
